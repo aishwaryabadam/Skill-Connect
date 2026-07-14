@@ -71,10 +71,7 @@ A full-stack **peer-to-peer skill exchange platform** where users teach what the
 
 SkillConnect follows a **client–server architecture** with a React SPA frontend, a REST + WebSocket Express backend, and MongoDB for persistence. Video/audio in the live classroom is peer-to-peer via WebRTC, with Socket.IO used purely for signaling (offer/answer/ICE exchange), whiteboard sync, chat, and notifications.
 
-> 📌 **Add your architecture diagram here.** Design it in draw.io, Excalidraw, Figma, or similar, export as PNG, save it to `architecture/System_Architecture.png` in your repo, then replace the placeholder line below with:
-> `![System Architecture](./architecture/System_Architecture.png)`
-
-<!-- ![System Architecture](./architecture/System_Architecture.png) -->
+![System Architecture](./screenshots/skill-connectarchitecture.png)
 *(Add your system architecture diagram here — showing Frontend ↔ Backend ↔ Database, plus the Socket.IO signaling and WebRTC peer-to-peer video path)*
 
 **Request flow (typical skill-swap → session lifecycle):**
