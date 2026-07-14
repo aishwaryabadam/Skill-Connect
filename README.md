@@ -227,113 +227,17 @@ Authentication is required via a JWT token passed in the socket handshake.
 
 ## 📸 Screenshots
 
-### 🔐 Login Page
-![Login Page](./screenshots/Screenshot 2026-04-10 032505.png)
-*Secure user authentication with email/username and password.*
-
----
-
 ### 🏠 Home Page
-![Home Page](./screenshots/Screenshot 2026-04-10 032518.png)
+![Home Page](./screenshots/Screenshot%202026-04-10%20032518.png)
+
 *Landing page introducing SkillConnect and its core skill exchange platform.*
-
+![](./screenshots/Screenshot%202026-04-10%20032557.png)
+![](./screenshots/Screenshot%202026-04-10%20032609.png)
+![](./screenshots/Screenshot%202026-04-10%20032629.png)
+![](./screenshots/Screenshot%202026-04-10%20032929.png).
 ---
 
-### 📈 Platform Statistics
-![Platform Statistics](./screenshots/Screenshot 2026-04-10 032529.png)
-*Displays platform achievements, user statistics, and the three-step learning process.*
 
----
-
-### 🤖 AI Chat Assistant
-![AI Chat Assistant](./screenshots/Screenshot 2026-04-10 032557.png)
-*Built-in chatbot that assists users by answering platform-related questions.*
-
----
-
-### ✨ Key Features
-![Key Features](./screenshots/Screenshot 2026-04-10 032609.png)
-*Highlights major features such as smart matching, virtual classrooms, reviews, and security.*
-
----
-
-### 🚀 Call to Action
-![Call to Action](./screenshots/Screenshot 2026-04-10 032618.png)
-*Encourages users to join the platform and start exchanging skills.*
-
----
-
-### 👥 Browse Profiles
-![Browse Profiles](./screenshots/Screenshot 2026-04-10 032629.png)
-*View recommended skill exchange partners based on matching interests.*
-
----
-
-### 📋 All User Profiles
-![All Profiles](./screenshots/Screenshot 2026-04-10 032641.png)
-*Explore all registered users along with their skills, availability, and profiles.*
-
----
-
-### 📝 Community Blogs
-![Blogs](./screenshots/Screenshot 2026-04-10 032658.png)
-*Read educational blogs, learning experiences, and community success stories.*
-
----
-
-### ℹ️ About SkillConnect
-![About](./screenshots/Screenshot 2026-04-10 032712.png)
-*Overview of the platform's mission and vision for peer-to-peer learning.*
-
----
-
-### 🎯 Our Mission
-![Mission](./screenshots/Screenshot 2026-04-10 032719.png)
-*Explains the mission of making education accessible through skill exchange.*
-
----
-
-### 💙 Our Values
-![Our Values](./screenshots/Screenshot 2026-04-10 032747.png)
-*Showcases the principles that guide the platform and its community.*
-
----
-
-### ⭐ Why Choose SkillConnect
-![Why Choose SkillConnect](./screenshots/Screenshot 2026-04-10 032756.png)
-*Highlights platform benefits including verified users, flexible scheduling, and progress tracking.*
-
----
-
-### 📚 How It Works
-![How It Works](./screenshots/Screenshot 2026-04-10 032811.png)
-*Illustrates the complete skill exchange workflow from profile creation to learning.*
-
----
-
-### 🎓 Learning Journey
-![Learning Journey](./screenshots/Screenshot 2026-04-10 032824.png)
-*Shows the remaining steps of the learning journey including sessions, classrooms, and reviews.*
-
----
-
-### 📨 Skill Exchange Requests
-![Requests](./screenshots/Screenshot 2026-04-10 032847.png)
-*Manage incoming requests, create sessions, and connect with learners.*
-
----
-
-### 📤 Outgoing Requests
-![Outgoing Requests](./screenshots/Screenshot 2026-04-10 032904.png)
-*Track sent requests and monitor their current acceptance status.*
-
----
-
-### 🎥 Learning Sessions
-![Learning Sessions](./screenshots/Screenshot 2026-04-10 032929.png)
-*View scheduled, ongoing, and completed learning sessions with peers.*
-
----
 
 ## 🤝 Contributing
 
