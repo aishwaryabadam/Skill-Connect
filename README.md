@@ -1,190 +1,138 @@
-# SkillConnect
+# 🤝 SkillConnect
 
-A full-stack peer-to-peer skill exchange platform where users can teach what they know and learn what they need — all in one place.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/aishwaryabadam/Skill-Connect/blob/main/LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React_18-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Socket.IO](https://img.shields.io/badge/Socket.IO-black?style=flat&logo=socket.io&badgeColor=010101)](https://socket.io/)
+[![WebRTC](https://img.shields.io/badge/WebRTC-333333?style=flat&logo=webrtc&logoColor=white)](https://webrtc.org/)
 
----
-
-## Overview
-
-SkillConnect enables users to connect based on complementary skills. A user who knows Python and wants to learn Guitar can find someone who knows Guitar and wants to learn Python, and they can exchange knowledge through a structured session flow — from browsing profiles, sending requests, scheduling sessions, and joining a live virtual classroom.
-
----
-
-## Features
-
-- **Browse & Match** — Discover users by the skills they teach and the skills they want to learn
-- **Skill Exchange Requests** — Send, accept, reject, or reschedule swap requests with a match score
-- **Session Management** — Schedule online or offline sessions with full status tracking
-- **Live Classroom** — Real-time collaborative environment with:
-  - WebRTC video/audio calling
-  - Live shared whiteboard
-  - In-session chat
-- **Knowledge Tests** — Tutors can create MCQ assessments for learners post-session
-- **Reviews & Ratings** — Leave feedback after completed sessions
-- **Notifications** — Real-time in-app notifications via Socket.IO
-- **Blogs** — Community blog posts for sharing knowledge
-- **User Profiles** — Showcase skills, education, availability, and social links
+A full-stack **peer-to-peer skill exchange platform** where users teach what they know and learn what they need — no money involved, just knowledge for knowledge. Browse profiles, match on complementary skills, request a swap, schedule a session, and meet live in a built-in virtual classroom with video, whiteboard, and chat.
 
 ---
 
-## Tech Stack
+## 📋 Table of Contents
 
-### Frontend
-| Technology | Purpose |
-|---|---|
-| React 18 | UI framework |
-| Vite | Build tool |
-| React Router v6 | Client-side routing |
-| Tailwind CSS | Styling |
-| Zustand | Global auth state |
-| Axios | HTTP client |
-| Socket.IO Client | Real-time communication |
-| React Hook Form | Form management |
-
-### Backend
-| Technology | Purpose |
-|---|---|
-| Node.js + Express | REST API server |
-| MongoDB + Mongoose | Database & ODM |
-| Socket.IO | WebSockets (chat, whiteboard, notifications) |
-| JWT | Authentication |
-| bcrypt | Password hashing |
-| Zod / express-validator | Input validation |
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#-architecture)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [API Reference](#-api-reference)
+- [Real-Time Events](#-real-time-events-socketio)
+- [Screenshots](#-screenshots)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Contact & Support](#-contact--support)
 
 ---
 
-## Project Structure
+## ✨ Features
 
-```
-SkillConnect/
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── db.js               # MongoDB connection
-│   │   ├── middleware/
-│   │   │   └── auth.js             # JWT auth middleware
-│   │   ├── models/
-│   │   │   ├── User.js             # Auth credentials
-│   │   │   ├── Profile.js          # Skills, bio, social links
-│   │   │   ├── Request.js          # Skill swap requests
-│   │   │   ├── Session.js          # Scheduled sessions
-│   │   │   ├── Test.js             # MCQ assessments
-│   │   │   ├── Review.js           # Session reviews
-│   │   │   ├── Notification.js     # In-app notifications
-│   │   │   └── Blog.js             # Community blog posts
-│   │   ├── routes/
-│   │   │   ├── auth.js             # Register / Login
-│   │   │   ├── profiles.js         # Profile CRUD & search
-│   │   │   ├── requests.js         # Skill swap request management
-│   │   │   ├── sessions.js         # Session scheduling & status
-│   │   │   ├── tests.js            # Test creation & attempts
-│   │   │   ├── reviews.js          # Post-session reviews
-│   │   │   ├── notifications.js    # Notification fetch & mark-read
-│   │   │   └── blogs.js            # Blog CRUD
-│   │   ├── services/
-│   │   │   └── socketService.js    # Shared Socket.IO instance
-│   │   └── server.js              # App entry point, Socket.IO handlers
-│   ├── .env.example
-│   └── package.json
-│
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── api/
-│   │   │   ├── axios.js            # Axios instance with auth header
-│   │   │   └── socket.js           # Socket.IO client setup
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   └── Layout.jsx
-│   │   ├── pages/
-│   │   │   ├── Home.jsx
-│   │   │   ├── Browse.jsx          # Search & filter profiles
-│   │   │   ├── Profile.jsx         # View another user's profile
-│   │   │   ├── MyProfile.jsx       # Edit own profile
-│   │   │   ├── Requests.jsx        # Manage incoming/outgoing requests
-│   │   │   ├── Sessions.jsx        # Session list
-│   │   │   ├── SessionDetail.jsx   # Session info & actions
-│   │   │   ├── Classroom.jsx       # Live video + whiteboard + chat
-│   │   │   ├── Reviews.jsx
-│   │   │   ├── Notifications.jsx
-│   │   │   ├── Blogs.jsx
-│   │   │   ├── BlogPost.jsx
-│   │   │   ├── About.jsx
-│   │   │   ├── HowItWorks.jsx
-│   │   │   ├── Login.jsx
-│   │   │   └── Signup.jsx
-│   │   ├── store/
-│   │   │   └── authStore.js        # Zustand auth store
-│   │   ├── App.jsx                 # Routes definition
-│   │   └── main.jsx
-│   └── package.json
-│
-├── install-backend.bat
-├── install-frontend.bat
-```
+### 🔎 Browse & Match
+- **Skill-Based Discovery** — Find users by the skills they teach and the skills they want to learn
+- **Match Scoring** — Requests are ranked by how well two users' skills complement each other
+- **Search & Filter** — Quickly narrow down profiles by skill, availability, or category
+
+### 🔁 Exchange & Scheduling
+- **Skill Swap Requests** — Send, accept, reject, or reschedule exchange requests
+- **Session Management** — Schedule online or offline sessions with full status tracking (pending → scheduled → completed)
+
+### 🎥 Live Virtual Classroom
+- **WebRTC Video/Audio Calling** — Real-time face-to-face teaching sessions
+- **Shared Whiteboard** — Collaborative drawing surface synced live between both users
+- **In-Session Chat** — Text chat alongside the video call
+
+### 📝 Assessment & Feedback
+- **Knowledge Tests** — Tutors create MCQ assessments for learners after a session
+- **Reviews & Ratings** — Leave feedback after completed sessions to build trust in the community
+
+### 🔔 Community & Engagement
+- **Real-Time Notifications** — Instant in-app alerts via Socket.IO for requests, sessions, and messages
+- **Blogs** — Community posts for sharing knowledge and tips
+- **Rich User Profiles** — Skills, bio, education, availability, and social links
 
 ---
 
-## Getting Started
+## 🛠️ Tech Stack
+
+### **Frontend**
+[![React](https://img.shields.io/badge/React_18-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/) [![React Router](https://img.shields.io/badge/React_Router_v6-CA4245?style=flat&logo=reactrouter&logoColor=white)](https://reactrouter.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat)](https://zustand-demo.pmnd.rs/) [![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white)](https://axios-http.com/) [![Socket.IO Client](https://img.shields.io/badge/Socket.IO_Client-black?style=flat&logo=socket.io)](https://socket.io/) [![React Hook Form](https://img.shields.io/badge/React_Hook_Form-EC5990?style=flat&logo=reacthookform&logoColor=white)](https://react-hook-form.com/)
+
+### **Backend**
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/) [![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/) [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/) [![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat&logo=mongoose&logoColor=white)](https://mongoosejs.com/) [![Socket.IO](https://img.shields.io/badge/Socket.IO-black?style=flat&logo=socket.io)](https://socket.io/) [![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white)](https://jwt.io/) [![bcrypt](https://img.shields.io/badge/bcrypt-338033?style=flat)](https://www.npmjs.com/package/bcrypt)
+
+### **Real-Time & Communication**
+[![Socket.IO](https://img.shields.io/badge/Socket.IO-black?style=flat&logo=socket.io)](https://socket.io/) [![WebRTC](https://img.shields.io/badge/WebRTC-333333?style=flat&logo=webrtc&logoColor=white)](https://webrtc.org/)
+
+---
+
+## 🏗️ Architecture
+
+SkillConnect follows a **client–server architecture** with a React SPA frontend, a REST + WebSocket Express backend, and MongoDB for persistence. Video/audio in the live classroom is peer-to-peer via WebRTC, with Socket.IO used purely for signaling (offer/answer/ICE exchange), whiteboard sync, chat, and notifications.
+
+> 📌 **Add your architecture diagram here.** Design it in draw.io, Excalidraw, Figma, or similar, export as PNG, save it to `architecture/System_Architecture.png` in your repo, then replace the placeholder line below with:
+> `![System Architecture](./architecture/System_Architecture.png)`
+
+<!-- ![System Architecture](./architecture/System_Architecture.png) -->
+*(Add your system architecture diagram here — showing Frontend ↔ Backend ↔ Database, plus the Socket.IO signaling and WebRTC peer-to-peer video path)*
+
+**Request flow (typical skill-swap → session lifecycle):**
+
+1. User registers/logs in → JWT issued and stored client-side (Zustand)
+2. User browses profiles (`GET /profiles`) and sends a swap request (`POST /requests`)
+3. Recipient accepts the request → a `Session` document is created
+4. Both users join the classroom room via `join_room` (Socket.IO) at the scheduled time
+5. WebRTC handles the live video/audio directly between browsers; Socket.IO relays only signaling data, whiteboard strokes, and chat messages
+6. After the session, the tutor can create a test and the learner leaves a review
+
+---
+
+## 🚀 Installation
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) v18 or higher
 - A [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cluster (or local MongoDB instance)
+- Git
 
----
+### Quick Start
 
-### 1. Clone the Repository
+1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/skillconnect.git
-cd skillconnect
+git clone https://github.com/aishwaryabadam/Skill-Connect.git
+cd Skill-Connect
 ```
 
----
-
-### 2. Set Up the Backend
+2. **Set Up the Backend**
 
 ```bash
 cd backend
 npm install
-```
-
-Create a `.env` file by copying the example:
-
-```bash
 cp .env.example .env
 ```
 
-Fill in your values:
+Fill in `.env`:
 
 ```env
 PORT=5000
 MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/skillconnect
 JWT_SECRET=your-strong-secret-key
 NODE_ENV=development
+CLIENT_ORIGIN=http://localhost:3000
 ```
 
-> ⚠️ Never commit your `.env` file. It is already listed in `.gitignore`.
-
-Start the backend:
+> ⚠️ Never commit your `.env` file — it's already listed in `.gitignore`.
 
 ```bash
-# Development (with auto-reload)
-npm run dev
-
-# Production
-npm start
+npm run dev     # development, with auto-reload
+npm start       # production
 ```
 
-The server will run on `http://localhost:5000`.
+Backend runs on `http://localhost:5000`.
 
----
-
-### 3. Set Up the Frontend
-
-Open a new terminal:
+3. **Set Up the Frontend**
 
 ```bash
 cd frontend
@@ -192,22 +140,45 @@ npm install
 npm run dev
 ```
 
-The app will be available at `http://localhost:3000`.
+Frontend runs on `http://localhost:3000`.
 
----
-
-### Windows Quick Start
+### 🪟 Windows Quick Start
 
 Double-click the provided batch scripts in the root folder:
 
-1. `install-backend.bat` — Installs backend dependencies
-2. `install-frontend.bat` — Installs frontend dependencies
-3. `run-backend.bat` — Starts the backend server
-4. `run-frontend.bat` — Starts the frontend dev server
+| Script | Purpose |
+|---|---|
+| `install-backend.bat` | Installs backend dependencies |
+| `install-frontend.bat` | Installs frontend dependencies |
+| `run-backend.bat` | Starts the backend server |
+| `run-frontend.bat` | Starts the frontend dev server |
 
 ---
 
-## API Reference
+## 📖 Usage
+
+### 🔎 Finding a Skill Match
+1. Sign up and complete your profile with skills you can **teach** and skills you want to **learn**
+2. Browse or search other profiles filtered by skill
+3. Send a skill swap request to a matching user
+
+### 🔁 Managing Requests & Sessions
+1. Accept, reject, or reschedule incoming requests from the **Requests** page
+2. Once accepted, schedule a session (online or offline)
+3. Track session status from **Sessions** → **Session Detail**
+
+### 🎥 Live Classroom
+1. Join the classroom at the scheduled time
+2. Use video/audio (WebRTC), the shared whiteboard, and chat together
+3. After the session, the tutor can issue a short MCQ test to check understanding
+
+### ⭐ After the Session
+1. Leave a review and rating for the other user
+2. Read or write community **Blog** posts to share what you've learned
+
+---
+
+## 📡 API Reference
 
 All endpoints are prefixed with `/api`.
 
@@ -236,7 +207,7 @@ All endpoints are prefixed with `/api`.
 
 ---
 
-## Real-Time Events (Socket.IO)
+## ⚡ Real-Time Events (Socket.IO)
 
 Authentication is required via a JWT token passed in the socket handshake.
 
@@ -254,19 +225,117 @@ Authentication is required via a JWT token passed in the socket handshake.
 
 ---
 
-## Environment Variables
+## 📸 Screenshots
 
-| Variable | Required | Description |
-|---|---|---|
-| `PORT` | No | Server port (default: `5000`) |
-| `MONGODB_URI` | Yes | MongoDB connection string |
-| `JWT_SECRET` | Yes | Secret key for signing JWTs |
-| `NODE_ENV` | No | `development` or `production` |
-| `CLIENT_ORIGIN` | No | Frontend URL for CORS (default: `http://localhost:3000`) |
+### 🔐 Login Page
+![Login Page](./screenshots/Screenshot 2026-04-10 032505.png)
+*Secure user authentication with email/username and password.*
 
 ---
 
-## Contributing
+### 🏠 Home Page
+![Home Page](./screenshots/Screenshot 2026-04-10 032518.png)
+*Landing page introducing SkillConnect and its core skill exchange platform.*
+
+---
+
+### 📈 Platform Statistics
+![Platform Statistics](./screenshots/Screenshot 2026-04-10 032529.png)
+*Displays platform achievements, user statistics, and the three-step learning process.*
+
+---
+
+### 🤖 AI Chat Assistant
+![AI Chat Assistant](./screenshots/Screenshot 2026-04-10 032557.png)
+*Built-in chatbot that assists users by answering platform-related questions.*
+
+---
+
+### ✨ Key Features
+![Key Features](./screenshots/Screenshot 2026-04-10 032609.png)
+*Highlights major features such as smart matching, virtual classrooms, reviews, and security.*
+
+---
+
+### 🚀 Call to Action
+![Call to Action](./screenshots/Screenshot 2026-04-10 032618.png)
+*Encourages users to join the platform and start exchanging skills.*
+
+---
+
+### 👥 Browse Profiles
+![Browse Profiles](./screenshots/Screenshot 2026-04-10 032629.png)
+*View recommended skill exchange partners based on matching interests.*
+
+---
+
+### 📋 All User Profiles
+![All Profiles](./screenshots/Screenshot 2026-04-10 032641.png)
+*Explore all registered users along with their skills, availability, and profiles.*
+
+---
+
+### 📝 Community Blogs
+![Blogs](./screenshots/Screenshot 2026-04-10 032658.png)
+*Read educational blogs, learning experiences, and community success stories.*
+
+---
+
+### ℹ️ About SkillConnect
+![About](./screenshots/Screenshot 2026-04-10 032712.png)
+*Overview of the platform's mission and vision for peer-to-peer learning.*
+
+---
+
+### 🎯 Our Mission
+![Mission](./screenshots/Screenshot 2026-04-10 032719.png)
+*Explains the mission of making education accessible through skill exchange.*
+
+---
+
+### 💙 Our Values
+![Our Values](./screenshots/Screenshot 2026-04-10 032747.png)
+*Showcases the principles that guide the platform and its community.*
+
+---
+
+### ⭐ Why Choose SkillConnect
+![Why Choose SkillConnect](./screenshots/Screenshot 2026-04-10 032756.png)
+*Highlights platform benefits including verified users, flexible scheduling, and progress tracking.*
+
+---
+
+### 📚 How It Works
+![How It Works](./screenshots/Screenshot 2026-04-10 032811.png)
+*Illustrates the complete skill exchange workflow from profile creation to learning.*
+
+---
+
+### 🎓 Learning Journey
+![Learning Journey](./screenshots/Screenshot 2026-04-10 032824.png)
+*Shows the remaining steps of the learning journey including sessions, classrooms, and reviews.*
+
+---
+
+### 📨 Skill Exchange Requests
+![Requests](./screenshots/Screenshot 2026-04-10 032847.png)
+*Manage incoming requests, create sessions, and connect with learners.*
+
+---
+
+### 📤 Outgoing Requests
+![Outgoing Requests](./screenshots/Screenshot 2026-04-10 032904.png)
+*Track sent requests and monitor their current acceptance status.*
+
+---
+
+### 🎥 Learning Sessions
+![Learning Sessions](./screenshots/Screenshot 2026-04-10 032929.png)
+*View scheduled, ongoing, and completed learning sessions with peers.*
+
+---
+
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature`
@@ -274,8 +343,27 @@ Authentication is required via a JWT token passed in the socket handshake.
 4. Push to the branch: `git push origin feature/your-feature`
 5. Open a Pull Request
 
+### Areas for Contribution
+- 🎨 UI/UX improvements
+- 🧪 Additional test coverage
+- 📱 Mobile responsiveness enhancements
+- 🌐 Localization / multi-language support
+- 🔒 Security hardening (rate limiting, input sanitization)
+
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/aishwaryabadam/Skill-Connect/blob/main/LICENSE).
+
+---
+
+## 📞 Contact & Support
+
+- 🐙 **GitHub**: [aishwaryabadam](https://github.com/aishwaryabadam)
+- 📧 **Email**: *add your contact email here*
+- 💼 **LinkedIn**: *add your LinkedIn profile link here*
+
+---
+
+**Built with ❤️ to make peer-to-peer learning simple and accessible**
